@@ -20,8 +20,9 @@
     html[lang="ar"] .en { display: none !important; }
     html[lang="en"] .ar { display: none !important; }
     
-    html[lang="ar"] * { font-family: 'Cairo', sans-serif; }
-    html[lang="en"] * { font-family: 'Poppins', sans-serif; }
+    /* FIX: Apply fonts to body and buttons only, NOT to all elements (*) */
+    html[lang="ar"] body, html[lang="ar"] button { font-family: 'Cairo', sans-serif; }
+    html[lang="en"] body, html[lang="en"] button { font-family: 'Poppins', sans-serif; }
 
     body {
       margin: 0;
