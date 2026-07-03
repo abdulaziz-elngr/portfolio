@@ -1,20 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" id="html-root">
 <head>
   <meta charset="UTF-8">
   <title>Eng. Abdulaziz Elngar | IoT & Embedded Systems Engineer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
     * {
       box-sizing: border-box;
       scroll-behavior: smooth;
     }
+
+    /* Language display logic */
+    html[lang="ar"] .en { display: none !important; }
+    html[lang="en"] .ar { display: none !important; }
     
-    body, button { font-family: 'Poppins', sans-serif; }
+    html[lang="ar"] body, html[lang="ar"] button { font-family: 'Cairo', sans-serif; }
+    html[lang="en"] body, html[lang="en"] button { font-family: 'Poppins', sans-serif; }
 
     body {
       margin: 0;
@@ -74,6 +81,26 @@
       letter-spacing: 1px;
     }
 
+    .lang-btn {
+      background: transparent;
+      color: #00e5ff;
+      border: 1px solid #00e5ff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-btn:hover {
+      background: #00e5ff;
+      color: #090a0f;
+      box-shadow: 0 0 10px #00e5ff;
+    }
+
     section {
       padding: 60px 8%;
     }
@@ -86,6 +113,9 @@
       margin-bottom: 35px;
     }
 
+    html[lang="ar"] .section-title::after { right: 0; }
+    html[lang="en"] .section-title::after { left: 0; }
+
     .section-title::after {
       content: '';
       position: absolute;
@@ -93,7 +123,6 @@
       height: 3px;
       background: linear-gradient(90deg, #00e5ff, transparent);
       bottom: -10px;
-      left: 0;
     }
 
     .about-text {
@@ -233,14 +262,24 @@
   <div class="header-profile">
     <img src="my_photo.png" alt="Eng. Abdulaziz Elngar">
     <div>
-      <h1>Eng. Abdulaziz Elngar <span>Embedded Systems & IoT Engineer</span></h1>
+      <h1 class="ar">المهندس عبدالعزيز النجار <span>مهندس أنظمة مدمجة وإنترنت أشياء</span></h1>
+      <h1 class="en">Eng. Abdulaziz Elngar <span>Embedded Systems & IoT Engineer</span></h1>
     </div>
   </div>
+  <button class="lang-btn" onclick="toggleLanguage()">
+    <i class="fa-solid fa-globe"></i> <span id="lang-text">العربية</span>
+  </button>
 </header>
 
 <section id="about">
-  <h2 class="section-title">About Me</h2>
-  <p class="about-text">
+  <h2 class="section-title ar">نبذة عني</h2>
+  <h2 class="section-title en">About Me</h2>
+  <p class="about-text ar">
+    أنا مهندس أنظمة مدمجة وإنترنت أشياء (IoT) شغوف بربط العالم المادي بالرقمي. تكمن خبرتي في تصميم الهياكل الصلبة (Hardware) القابلة للتوسع، وتطوير البرامج الثابتة (Firmware) الموثوقة باستخدام C/C++، وبناء لوحات تحكم متقدمة للمراقبة اللحظية.
+    <br><br>
+    من برمجة المتحكمات الدقيقة مثل ESP32 و Arduino، إلى تطبيق أنظمة التشغيل في الوقت الفعلي (FreeRTOS) وبروتوكولات الاتصال الصناعية، أسعى دائماً لتقديم حلول IoT فعالة، آمنة، وعالية الأداء. يدفعني دائماً التحدي المتمثل في تحويل التكاملات المعقدة للأجهزة إلى أنظمة ذكية وسلسة.
+  </p>
+  <p class="about-text en">
     I am a dedicated Embedded Systems and IoT Engineer with a strong passion for bridging the physical and digital worlds. My expertise lies in designing scalable hardware architectures, developing robust firmware using C/C++, and building advanced real-time monitoring dashboards. 
     <br><br>
     From bare-metal programming on microcontrollers like ESP32 and Arduino to implementing real-time operating systems (FreeRTOS) and industrial communication protocols, I strive to deliver efficient, secure, and high-performance IoT solutions. I am driven by the challenge of transforming complex hardware integrations into seamless, intelligent systems.
@@ -248,11 +287,14 @@
 </section>
 
 <section id="skills">
-  <h2 class="section-title">Technical Expertise</h2>
+  <h2 class="section-title ar">الخبرات التقنية</h2>
+  <h2 class="section-title en">Technical Expertise</h2>
   <div class="skills-container">
     
+    <!-- Hardware & Microcontrollers -->
     <div class="skills-category">
-      <h3>Microcontrollers & Hardware</h3>
+      <h3 class="ar">المتحكمات الدقيقة والعتاد الصلب</h3>
+      <h3 class="en">Microcontrollers & Hardware</h3>
       <div class="skills-grid">
         <div class="skill-item"><i class="fa-solid fa-microchip"></i><p>ESP32 / ESP8266</p></div>
         <div class="skill-item"><i class="fa-solid fa-memory"></i><p>Arduino</p></div>
@@ -261,19 +303,23 @@
       </div>
     </div>
 
+    <!-- Firmware & Protocols -->
     <div class="skills-category">
-      <h3>Firmware & Protocols</h3>
+      <h3 class="ar">البرامج الثابتة والبروتوكولات</h3>
+      <h3 class="en">Firmware & Protocols</h3>
       <div class="skills-grid">
         <div class="skill-item"><i class="fa-solid fa-code"></i><p>C / C++</p></div>
         <div class="skill-item"><i class="fa-solid fa-gears"></i><p>FreeRTOS</p></div>
         <div class="skill-item"><i class="fa-solid fa-network-wired"></i><p>I2C / SPI / UART</p></div>
-        <div class="skill-item"><i class="fa-solid fa-wifi"></i><p>MQTT / HTTP / Wi-Fi</p></div>
+        <div class="skill-item"><i class="fa-solid fa-wifi"></i><p>MQTT / HTTP</p></div>
         <div class="skill-item"><i class="fa-brands fa-bluetooth"></i><p>BLE</p></div>
       </div>
     </div>
 
+    <!-- Software & GUI -->
     <div class="skills-category">
-      <h3>Software & GUI Dashboards</h3>
+      <h3 class="ar">البرمجيات ولوحات التحكم</h3>
+      <h3 class="en">Software & GUI Dashboards</h3>
       <div class="skills-grid">
         <div class="skill-item"><i class="fa-solid fa-desktop"></i><p>Qt / QML</p></div>
         <div class="skill-item"><i class="fa-solid fa-terminal"></i><p>ESP-IDF</p></div>
@@ -286,13 +332,17 @@
 </section>
 
 <section id="projects">
-  <h2 class="section-title">Featured IoT Projects</h2>
+  <h2 class="section-title ar">مشاريع إنترنت الأشياء</h2>
+  <h2 class="section-title en">Featured IoT Projects</h2>
   <div class="projects-grid">
 
+    <!-- Project 1 -->
     <div class="project-card">
       <div>
-        <h3>Smart Firefighting System & Dashboard</h3>
-        <p>An integrated IoT system based on ESP32 and highly sensitive gas/flame sensors to detect potential fires and gas leaks. Accompanied by a custom-built Qt/QML desktop dashboard for real-time data monitoring and hardware control via serial and wireless communication.</p>
+        <h3 class="ar">نظام مكافحة الحرائق الذكي ولوحة التحكم</h3>
+        <h3 class="en">Smart Firefighting System & Dashboard</h3>
+        <p class="ar">نظام متكامل يعتمد على متحكم ESP32 ومستشعرات لرصد وتوقع الحرائق وتسريب الغازات، مع بناء لوحة تحكم متقدمة باستخدام Qt/QML لمراقبة البيانات والتحكم لحظياً عبر الاتصال اللاسلكي والسيريال.</p>
+        <p class="en">An integrated IoT system based on ESP32 and highly sensitive gas/flame sensors to detect potential fires and gas leaks. Accompanied by a custom-built Qt/QML desktop dashboard for real-time data monitoring and hardware control.</p>
       </div>
       <div class="project-tags">
         <span class="tag">ESP32</span>
@@ -302,10 +352,13 @@
       </div>
     </div>
 
+    <!-- Project 2 -->
     <div class="project-card">
       <div>
-        <h3>Autonomous Firefighting Robot</h3>
-        <p>A smart robotics project featuring an autonomous rover designed for indoor environments. It uses embedded C and flame sensors to navigate towards fire sources, automatically deploying a mechanical extinguishing system while transmitting real-time alerts.</p>
+        <h3 class="ar">روبوت مكافحة الحرائق الذاتي القيادة</h3>
+        <h3 class="en">Autonomous Firefighting Robot</h3>
+        <p class="ar">روبوت ذكي يتحرك ذاتياً داخل المنشآت باستخدام مستشعرات اللهب للكشف عن بؤر النيران، وتفعيل نظام الإطفاء الميكانيكي مع إرسال إشعارات فورية.</p>
+        <p class="en">A smart robotics project featuring an autonomous rover designed for indoor environments. It uses embedded C and flame sensors to navigate towards fire sources, automatically deploying a mechanical extinguishing system.</p>
       </div>
       <div class="project-tags">
         <span class="tag">Arduino</span>
@@ -315,10 +368,13 @@
       </div>
     </div>
 
+    <!-- Project 3 -->
     <div class="project-card">
       <div>
-        <h3>Industrial IoT Environmental Node</h3>
-        <p>A robust edge node designed for industrial environments, utilizing FreeRTOS on an ESP32 to concurrently monitor temperature, humidity, and air quality (MQ135). Data is securely published to a cloud broker via MQTT with QoS 1.</p>
+        <h3 class="ar">عقدة إنترنت الأشياء البيئية الصناعية</h3>
+        <h3 class="en">Industrial IoT Environmental Node</h3>
+        <p class="ar">عقدة مصممة للبيئات الصناعية تستخدم FreeRTOS على ESP32 لمراقبة الحرارة والرطوبة وجودة الهواء بالتزامن، وإرسال البيانات بشكل آمن إلى خادم سحابي عبر بروتوكول MQTT.</p>
+        <p class="en">A robust edge node designed for industrial environments, utilizing FreeRTOS on an ESP32 to concurrently monitor temperature, humidity, and air quality (MQ135). Data is securely published to a cloud broker via MQTT.</p>
       </div>
       <div class="project-tags">
         <span class="tag">ESP-IDF</span>
@@ -328,10 +384,13 @@
       </div>
     </div>
 
+    <!-- Project 4 -->
     <div class="project-card">
       <div>
-        <h3>Smart Home Energy Monitor</h3>
-        <p>A non-invasive current monitoring system using ACS712 sensors and an ESP32 microcontroller. The firmware calculates RMS current and power consumption, pushing data to a local server for visualization on a Qt-based GUI.</p>
+        <h3 class="ar">نظام مراقبة استهلاك الطاقة المنزلي</h3>
+        <h3 class="en">Smart Home Energy Monitor</h3>
+        <p class="ar">نظام لمراقبة التيار الكهربائي غير التداخلي باستخدام مستشعرات ACS712 ومتحكم ESP32. يقوم النظام بحساب استهلاك الطاقة وعرضه على واجهة رسومية مبنية بـ Qt.</p>
+        <p class="en">A non-invasive current monitoring system using ACS712 sensors and an ESP32 microcontroller. The firmware calculates RMS current and power consumption, pushing data for visualization on a Qt-based GUI.</p>
       </div>
       <div class="project-tags">
         <span class="tag">ESP32</span>
@@ -341,10 +400,13 @@
       </div>
     </div>
 
+    <!-- Project 5 -->
     <div class="project-card">
       <div>
-        <h3>Biometric Access Control System</h3>
-        <p>A secure entry system integrating an RFID reader (SPI) and a fingerprint module (UART) with a central microcontroller. It handles multi-layer authentication and controls an electronic door strike relay.</p>
+        <h3 class="ar">نظام التحكم في الوصول البيومتري</h3>
+        <h3 class="en">Biometric Access Control System</h3>
+        <p class="ar">نظام دخول آمن يدمج قارئ RFID (SPI) ووحدة بصمة الإصبع (UART) مع متحكم مركزي. يدير النظام المصادقة متعددة الطبقات ويتحكم في فتح الباب إلكترونياً.</p>
+        <p class="en">A secure entry system integrating an RFID reader (SPI) and a fingerprint module (UART) with a central microcontroller. It handles multi-layer authentication and controls an electronic door strike relay.</p>
       </div>
       <div class="project-tags">
         <span class="tag">C/C++</span>
@@ -354,10 +416,13 @@
       </div>
     </div>
 
+    <!-- Project 6 -->
     <div class="project-card">
       <div>
-        <h3>Wearable Fall Detection & Health Monitor</h3>
-        <p>A wearable safety device utilizing an MPU6050 accelerometer/gyroscope. The embedded algorithm detects sudden falls and transmits an emergency signal via Bluetooth Low Energy (BLE) to a connected gateway.</p>
+        <h3 class="ar">جهاز ملبوس لاكتشاف السقوط ومراقبة الصحة</h3>
+        <h3 class="en">Wearable Fall Detection & Health Monitor</h3>
+        <p class="ar">جهاز أمان ملبوس يستخدم مستشعر الحركة MPU6050. تقوم الخوارزمية المدمجة باكتشاف السقوط المفاجئ وإرسال إشارة طوارئ عبر تقنية البلوتوث منخفضة الطاقة (BLE).</p>
+        <p class="en">A wearable safety device utilizing an MPU6050 accelerometer/gyroscope. The embedded algorithm detects sudden falls and transmits an emergency signal via Bluetooth Low Energy (BLE) to a connected gateway.</p>
       </div>
       <div class="project-tags">
         <span class="tag">BLE</span>
@@ -367,10 +432,13 @@
       </div>
     </div>
 
+    <!-- Project 7 -->
     <div class="project-card">
       <div>
-        <h3>Automated Greenhouse Controller</h3>
-        <p>A complete closed-loop control system that monitors soil moisture, ambient temperature, and light levels. It employs a PID controller to automatically operate water pumps, ventilation fans, and grow lights.</p>
+        <h3 class="ar">نظام تحكم آلي للصوب الزراعية</h3>
+        <h3 class="en">Automated Greenhouse Controller</h3>
+        <p class="ar">نظام تحكم مغلق الحلقة يراقب رطوبة التربة والحرارة والإضاءة. يستخدم وحدة تحكم PID لتشغيل مضخات المياه ومراوح التهوية وإضاءة النمو تلقائياً.</p>
+        <p class="en">A complete closed-loop control system that monitors soil moisture, ambient temperature, and light levels. It employs a PID controller to automatically operate water pumps, ventilation fans, and grow lights.</p>
       </div>
       <div class="project-tags">
         <span class="tag">PID Control</span>
@@ -380,10 +448,13 @@
       </div>
     </div>
 
+    <!-- Project 8 -->
     <div class="project-card">
       <div>
-        <h3>Low-Power Wireless Weather Station</h3>
-        <p>An outdoor weather monitoring station utilizing deep-sleep modes to run on solar and battery power for months. It wakes periodically to read BME280 sensor data and transmits it over a Wi-Fi HTTP POST request.</p>
+        <h3 class="ar">محطة أرصاد جوية لاسلكية منخفضة الاستهلاك</h3>
+        <h3 class="en">Low-Power Wireless Weather Station</h3>
+        <p class="ar">محطة خارجية لمراقبة الطقس تعتمد على وضع السبات العميق للعمل بالطاقة الشمسية لأشهر. تستيقظ دورياً لقراءة بيانات مستشعر BME280 وإرسالها عبر Wi-Fi.</p>
+        <p class="en">An outdoor weather monitoring station utilizing deep-sleep modes to run on solar and battery power for months. It wakes periodically to read BME280 sensor data and transmits it over a Wi-Fi HTTP POST request.</p>
       </div>
       <div class="project-tags">
         <span class="tag">Deep Sleep</span>
@@ -392,10 +463,13 @@
       </div>
     </div>
 
+    <!-- Project 9 -->
     <div class="project-card">
       <div>
-        <h3>Smart Traffic Light Management Node</h3>
-        <p>A localized traffic management system programmed using finite state machines (FSM). It adjusts traffic light timings dynamically based on ultrasonic sensor data detecting vehicle density in lanes.</p>
+        <h3 class="ar">عقدة إدارة إشارات المرور الذكية</h3>
+        <h3 class="en">Smart Traffic Light Management Node</h3>
+        <p class="ar">نظام إدارة مرور محلي مبرمج باستخدام آلة الحالات المنتهية (FSM). يقوم بتعديل توقيت إشارات المرور ديناميكياً بناءً على بيانات الموجات فوق الصوتية التي تكتشف كثافة المركبات.</p>
+        <p class="en">A localized traffic management system programmed using finite state machines (FSM). It adjusts traffic light timings dynamically based on ultrasonic sensor data detecting vehicle density in lanes.</p>
       </div>
       <div class="project-tags">
         <span class="tag">State Machines</span>
@@ -404,10 +478,13 @@
       </div>
     </div>
 
+    <!-- Project 10 -->
     <div class="project-card">
       <div>
-        <h3>Remote OBD-II Vehicle Diagnostics</h3>
-        <p>A vehicle diagnostic tool that interfaces with a car's CAN bus system using an MCP2515 module. It extracts real-time engine RPM and speed data, transmitting the telemetry to a remote server for analysis.</p>
+        <h3 class="ar">نظام تشخيص أعطال السيارات عن بعد OBD-II</h3>
+        <h3 class="en">Remote OBD-II Vehicle Diagnostics</h3>
+        <p class="ar">أداة تشخيص للسيارات تتصل بنظام CAN bus الخاص بالسيارة باستخدام وحدة MCP2515. تستخرج بيانات سرعة المحرك اللحظية وترسلها إلى خادم بعيد للتحليل.</p>
+        <p class="en">A vehicle diagnostic tool that interfaces with a car's CAN bus system using an MCP2515 module. It extracts real-time engine RPM and speed data, transmitting the telemetry to a remote server for analysis.</p>
       </div>
       <div class="project-tags">
         <span class="tag">CAN Bus</span>
@@ -421,9 +498,11 @@
 </section>
 
 <section id="contact">
-  <h2 class="section-title">Contact Me</h2>
+  <h2 class="section-title ar">تواصل معي</h2>
+  <h2 class="section-title en">Contact Me</h2>
   <div class="contact-container">
-    <p style="margin: 0; color: #94a3b8; font-size: 1.1rem;">Have a challenging hardware project or looking for an embedded systems expert? Let's connect.</p>
+    <p class="ar" style="margin: 0; color: #94a3b8; font-size: 1.1rem;">هل لديك تحدي في هندسة العتاد أو تبحث عن خبير في الأنظمة المدمجة؟ يسعدني تواصلك.</p>
+    <p class="en" style="margin: 0; color: #94a3b8; font-size: 1.1rem;">Have a challenging hardware project or looking for an embedded systems expert? Let's connect.</p>
     <div class="social-icons">
       <a href="mailto:abdelaziz.m.elnjjar@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
       <a href="tel:+201210959236" title="Phone"><i class="fa-solid fa-phone"></i></a>
@@ -432,6 +511,24 @@
     </div>
   </div>
 </section>
+
+<script>
+  // Language Toggle Logic
+  function toggleLanguage() {
+    const htmlTag = document.getElementById('html-root');
+    const langBtnText = document.getElementById('lang-text');
+    
+    if (htmlTag.getAttribute('lang') === 'ar') {
+      htmlTag.setAttribute('lang', 'en');
+      htmlTag.setAttribute('dir', 'ltr');
+      langBtnText.textContent = 'العربية';
+    } else {
+      htmlTag.setAttribute('lang', 'ar');
+      htmlTag.setAttribute('dir', 'rtl');
+      langBtnText.textContent = 'English';
+    }
+  }
+</script>
 
 </body>
 </html>
