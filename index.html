@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="html-root">
 <head>
   <meta charset="UTF-8">
-  <title>المهندس عبدالعزيز النجار | IoT & Full-Stack Engineer</title>
+  <title>Abdulaziz Elngar | Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
     * {
       box-sizing: border-box;
       scroll-behavior: smooth;
-      font-family: 'Cairo', sans-serif;
     }
+
+    /* Language display logic */
+    html[lang="ar"] .en { display: none !important; }
+    html[lang="en"] .ar { display: none !important; }
+    
+    html[lang="ar"] * { font-family: 'Cairo', sans-serif; }
+    html[lang="en"] * { font-family: 'Poppins', sans-serif; }
 
     body {
       margin: 0;
@@ -22,31 +30,24 @@
       overflow-x: hidden;
     }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #090a0f;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #00e5ff;
-      border-radius: 4px;
-    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #090a0f; }
+    ::-webkit-scrollbar-thumb { background: #00e5ff; border-radius: 4px; }
 
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 30px 8%;
-      background: rgba(18, 21, 32, 0.7);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      padding: 20px 8%;
+      background: rgba(18, 21, 32, 0.85);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
       border-bottom: 1px solid rgba(0, 229, 255, 0.2);
       position: sticky;
       top: 0;
-      z-index: 100;
-      animation: slideDown 0.8s ease;
+      z-index: 1000;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
     .header-profile {
@@ -56,8 +57,8 @@
     }
 
     header img {
-      width: 90px;
-      height: 90px;
+      width: 75px;
+      height: 75px;
       border-radius: 50%;
       border: 2px solid #00e5ff;
       box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
@@ -65,7 +66,7 @@
     }
 
     h1 {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       margin: 0;
       color: #ffffff;
       font-weight: 700;
@@ -74,15 +75,34 @@
     h1 span {
       color: #00e5ff;
       display: block;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 300;
       margin-top: 5px;
       letter-spacing: 1px;
     }
 
+    .lang-btn {
+      background: transparent;
+      color: #00e5ff;
+      border: 1px solid #00e5ff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-btn:hover {
+      background: #00e5ff;
+      color: #090a0f;
+      box-shadow: 0 0 10px #00e5ff;
+    }
+
     section {
       padding: 60px 8%;
-      animation: fadeUp 1s ease;
     }
 
     .section-title {
@@ -93,6 +113,9 @@
       margin-bottom: 35px;
     }
 
+    html[lang="ar"] .section-title::after { right: 0; }
+    html[lang="en"] .section-title::after { left: 0; }
+
     .section-title::after {
       content: '';
       position: absolute;
@@ -100,7 +123,6 @@
       height: 3px;
       background: linear-gradient(90deg, #00e5ff, transparent);
       bottom: -10px;
-      right: 0;
     }
 
     .about-text {
@@ -110,15 +132,13 @@
       max-width: 800px;
     }
 
-    /* Skills Grid Layout */
-    .skills-container {
+    .skills-container, .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
-      margin-top: 20px;
     }
 
-    .skills-category {
+    .skills-category, .project-card, .contact-container {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 16px;
@@ -142,7 +162,7 @@
 
     .skill-item {
       text-align: center;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease;
     }
 
     .skill-item i {
@@ -151,33 +171,11 @@
       margin-bottom: 8px;
     }
 
-    .skill-item p {
-      margin: 0;
-      font-size: 0.85rem;
-      color: #94a3b8;
-    }
-
-    .skill-item:hover {
-      transform: translateY(-5px);
-    }
-
-    .skill-item:hover i {
-      color: #ffffff;
-      text-shadow: 0 0 10px #00e5ff;
-    }
-
-    /* Projects Advanced Cards */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-    }
+    .skill-item p { margin: 0; font-size: 0.85rem; color: #94a3b8; }
+    .skill-item:hover { transform: translateY(-5px); }
+    .skill-item:hover i { color: #ffffff; text-shadow: 0 0 10px #00e5ff; }
 
     .project-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      padding: 25px;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       display: flex;
       flex-direction: column;
@@ -189,10 +187,7 @@
     .project-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
+      top: 0; left: 0; width: 100%; height: 4px;
       background: linear-gradient(90deg, #00e5ff, #7000ff);
       opacity: 0;
       transition: opacity 0.3s;
@@ -204,30 +199,12 @@
       border-color: rgba(0, 229, 255, 0.3);
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
     }
-
-    .project-card:hover::before {
-      opacity: 1;
-    }
-
-    .project-card h3 {
-      margin: 0 0 12px 0;
-      color: #ffffff;
-      font-size: 1.3rem;
-    }
-
-    .project-card p {
-      color: #94a3b8;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
+    .project-card:hover::before { opacity: 1; }
+    
+    .project-card h3 { margin: 0 0 12px 0; color: #ffffff; font-size: 1.25rem; }
+    .project-card p { color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
+    
+    .project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .tag {
       background: rgba(0, 229, 255, 0.1);
       color: #00e5ff;
@@ -237,72 +214,38 @@
       font-weight: bold;
     }
 
-    /* Contact & Socials */
     .contact-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 30px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 30px;
-      border-radius: 16px;
     }
 
-    .social-icons {
-      display: flex;
-      gap: 15px;
-    }
-
+    .social-icons { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
     .social-icons a {
-      width: 50px;
-      height: 50px;
+      width: 50px; height: 50px;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #00e5ff;
-      font-size: 20px;
-      transition: all 0.3s ease;
-      text-decoration: none;
+      display: flex; align-items: center; justify-content: center;
+      color: #00e5ff; font-size: 20px;
+      transition: all 0.3s ease; text-decoration: none;
     }
-
     .social-icons a:hover {
-      background: #00e5ff;
-      color: #090a0f;
-      transform: scale(1.1);
-      box-shadow: 0 0 15px #00e5ff;
+      background: #00e5ff; color: #090a0f;
+      transform: scale(1.1); box-shadow: 0 0 15px #00e5ff;
     }
 
-    /* Animations */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Responsive Design */
+    /* Mobile Responsive Adjustments */
     @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-      }
-      .header-profile {
-        flex-direction: column;
-        gap: 10px;
-      }
-      .contact-container {
-        flex-direction: column;
-        text-align: center;
-      }
+      header { justify-content: center; flex-direction: column; text-align: center; padding: 20px 5%; }
+      .header-profile { flex-direction: column; }
+      h1 { font-size: 1.4rem; }
+      section { padding: 40px 5%; }
+      .section-title { font-size: 1.6rem; }
+      .contact-container { flex-direction: column; text-align: center; }
+      .skills-container, .projects-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -310,40 +253,57 @@
 
 <header>
   <div class="header-profile">
-    <img src="my_photo.png" alt="Abdulaziz">
-    <h1>المهندس عبدالعزيز النجار <span>Embedded Systems & IoT Engineer</span></h1>
+    <img src="my_photo.png" alt="Abdulaziz Elngar">
+    <div>
+      <h1 class="ar">المهندس عبدالعزيز النجار <span>مهندس أنظمة مدمجة ومطور تقني متكامل</span></h1>
+      <h1 class="en">Eng. Abdulaziz Elngar <span>IoT & Full-Stack Software Engineer</span></h1>
+    </div>
   </div>
+  <button class="lang-btn" onclick="toggleLanguage()">
+    <i class="fa-solid fa-globe"></i> <span id="lang-text">English</span>
+  </button>
 </header>
 
 <section id="about">
-  <h2 class="section-title">نبذة عني</h2>
-  <p class="about-text">
-    أنا مهندس أنظمة مدمجة وإنترنت أشياء (IoT) ومطور ويب متكامل، شغوف بربط العالم المادي بالرقمي وبناء حلول ذكية ومتكاملة. تخصصي يجمع بين تصميم الأنظمة الصلبة (Hardware) القائمة على المتحكمات الدقيقة وتطوير البرمجيات (Software) لإدارة البيانات عبر الويب وتطبيقات الهاتف.
+  <h2 class="section-title ar">نبذة عني</h2>
+  <h2 class="section-title en">About Me</h2>
+  
+  <p class="about-text ar">
+    أنا مهندس أنظمة مدمجة وإنترنت أشياء (IoT) ومطور ويب متكامل، شغوف بربط العالم المادي بالرقمي وبناء حلول ذكية ومتكاملة. تخصصي يجمع بين تصميم الأنظمة الصلبة (Hardware) القائمة على المتحكمات الدقيقة وتطوير البرمجيات (Software) لإدارة البيانات عبر الويب.
     <br><br>
-    أمتلك خبرة عملية في التعامل مع المتحكمات الدقيقة مثل ESP32 وArduino وتطوير لوحات تحكم متقدمة لمراقبة البيانات لحظياً باستخدام تقنيات الويب الحديثة والـ بروتوكولات الصناعية. أسعى دائماً لتطبيق معايير الكود النظيف والهندسة المنظمة لتحويل الأفكار الإبداعية إلى مشاريع حقيقية ذات أثر صناعي وتكنولوجي.
+    أمتلك خبرة عملية في التعامل مع المتحكمات الدقيقة مثل ESP32 وArduino وتطوير أنظمة ويب قوية باستخدام تقنيات الويب الحديثة. أسعى دائماً لتطبيق معايير الكود النظيف والهندسة المنظمة لتحويل الأفكار الإبداعية إلى مشاريع حقيقية ذات أثر صناعي وتكنولوجي.
+  </p>
+  
+  <p class="about-text en">
+    I am an Embedded Systems & IoT Engineer and a Full-Stack Web Developer, passionate about connecting the physical world with the digital one to build integrated smart solutions. My expertise spans across hardware design using microcontrollers and software development for data management over the web.
+    <br><br>
+    I have hands-on experience with microcontrollers like ESP32 and Arduino, alongside building robust web systems using modern web technologies. I strive to apply clean code standards to transform creative ideas into real-world projects with a tangible technological impact.
   </p>
 </section>
 
 <section id="skills">
-  <h2 class="section-title">المهارات التقنية</h2>
+  <h2 class="section-title ar">المهارات التقنية</h2>
+  <h2 class="section-title en">Technical Skills</h2>
   <div class="skills-container">
     
     <div class="skills-category">
-      <h3>إنترنت الأشياء والأنظمة المدمجة</h3>
+      <h3 class="ar">إنترنت الأشياء والأنظمة المدمجة</h3>
+      <h3 class="en">IoT & Embedded Systems</h3>
       <div class="skills-grid">
         <div class="skill-item"><i class="fa-solid fa-microchip"></i><p>ESP32 / Arduino</p></div>
         <div class="skill-item"><i class="fa-solid fa-code"></i><p>C / C++</p></div>
         <div class="skill-item"><i class="fa-solid fa-wifi"></i><p>MQTT / HTTP</p></div>
-        <div class="skill-item"><i class="fa-solid fa-network-wired"></i><p>I2C / SPI / UART</p></div>
+        <div class="skill-item"><i class="fa-solid fa-network-wired"></i><p>I2C/SPI/UART</p></div>
         <div class="skill-item"><i class="fa-solid fa-gears"></i><p>FreeRTOS</p></div>
       </div>
     </div>
 
     <div class="skills-category">
-      <h3>تطوير البرمجيات والويب</h3>
+      <h3 class="ar">تطوير البرمجيات والويب</h3>
+      <h3 class="en">Web & Software Development</h3>
       <div class="skills-grid">
         <div class="skill-item"><i class="fa-brands fa-html5"></i><p>HTML5</p></div>
-        <div class="skill-item"><i class="fa-brands fa-css3-alt"></i><p>CSS3 / UI</p></div>
+        <div class="skill-item"><i class="fa-brands fa-css3-alt"></i><p>CSS3</p></div>
         <div class="skill-item"><i class="fa-brands fa-js"></i><p>JavaScript</p></div>
         <div class="skill-item"><i class="fa-brands fa-php"></i><p>PHP</p></div>
         <div class="skill-item"><i class="fa-solid fa-database"></i><p>MySQL</p></div>
@@ -351,7 +311,8 @@
     </div>
 
     <div class="skills-category">
-      <h3>أدوات ومفاهيم أساسية</h3>
+      <h3 class="ar">أدوات ومفاهيم أساسية</h3>
+      <h3 class="en">Tools & Core Concepts</h3>
       <div class="skills-grid">
         <div class="skill-item"><i class="fa-brands fa-github"></i><p>GitHub</p></div>
         <div class="skill-item"><i class="fa-solid fa-cubes"></i><p>OOP</p></div>
@@ -364,39 +325,63 @@
 </section>
 
 <section id="projects">
-  <h2 class="section-title">المشاريع الحالية والهندسية</h2>
+  <h2 class="section-title ar">المشاريع التقنية</h2>
+  <h2 class="section-title en">Technical Projects</h2>
   <div class="projects-grid">
 
+    <!-- 3asherna Guide -->
     <div class="project-card">
       <div>
-        <h3>نظام مكافحة الحرائق الذكي ولوحة التحكم (Smart Home Firefighting)</h3>
-        <p>نظام متكامل يعتمد على متحكم ESP32 ومجموعة من مستشعرات الغاز واللهب الذكية لرصد وتوقع الحرائق وتسريب الغازات، مع بناء لوحة تحكم متقدمة (Dashboard) باستخدام C++ وQt/QML لمراقبة البيانات والتحكم في النظام لحظياً عبر الاتصال التسلسلي واللاسلكي.</p>
+        <h3 class="ar">عاشرنا (دليل مدينة العاشر من رمضان)</h3>
+        <h3 class="en">3asherna (10th of Ramadan City Guide)</h3>
+        <p class="ar">تطبيق وموقع شامل يخدم سكان وزوار مدينة العاشر من رمضان، يضم دليلاً متكاملاً للخدمات، الأماكن التجارية، والمرافق العامة مع واجهة مستخدم تفاعلية لتسهيل الوصول للمعلومات المحلية.</p>
+        <p class="en">A comprehensive digital guide serving residents and visitors of 10th of Ramadan City. It features an integrated directory of local services, commercial places, and public facilities with an interactive UI.</p>
       </div>
       <div class="project-tags">
-        <span class="tag">ESP32</span>
-        <span class="tag">C++</span>
-        <span class="tag">Qt/QML</span>
-        <span class="tag">Sensors Integration</span>
+        <span class="tag">Full-Stack</span>
+        <span class="tag">Web App</span>
+        <span class="tag">Database</span>
+        <span class="tag">Local Services</span>
       </div>
     </div>
 
+    <!-- Innovation Digital Library -->
     <div class="project-card">
       <div>
-        <h3>روبوت مكافحة الحرائق الذاتي القيادة (Autonomous Firefighting Robot)</h3>
-        <p>تصميم وبرمجة روبوت ذكي يعتمد على برمجيات الأنظمة المدمجة، يقوم بالتحرك الذاتي داخل المنشآت للكشف عن بؤر النيران باستخدام مستشعرات اللهب، والتوجه نحوها تلقائياً لتفعيل نظام الإطفاء الذاتي والميكانيكي مع إرسال إشعارات فورية.</p>
+        <h3 class="ar">مكتبة جامعة الابتكار الرقمية</h3>
+        <h3 class="en">Innovation Digital Library</h3>
+        <p class="ar">منصة رقمية متكاملة لخدمة طلاب جامعة الابتكار، تتيح تصفح الكتب الإلكترونية، الأبحاث، والمراجع العلمية بسهولة، مزودة بنظام بحث متقدم وتصنيف ذكي للمصادر.</p>
+        <p class="en">An integrated digital platform for Innovation University students, allowing easy browsing of e-books, research papers, and scientific references with advanced search capabilities.</p>
       </div>
       <div class="project-tags">
-        <span class="tag">Arduino / ESP32</span>
-        <span class="tag">Embedded C</span>
-        <span class="tag">Robotics</span>
-        <span class="tag">Hardware Design</span>
+        <span class="tag">PHP & MySQL</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Digital Platform</span>
       </div>
     </div>
 
+    <!-- Innovation Library System -->
     <div class="project-card">
       <div>
-        <h3>نظام إدارة الابتكار الجامعي (Innovation Management System - IMS)</h3>
-        <p>نظام ويب متكامل لإدارة ومراقبة موارد الجامعة من قاعات، ومختبرات علمية، ومكتبات رقمية، يتيح للطلاب وأعضاء هيئة التدريس تتبع وحجز الموارد بكفاءة وسهولة تامة عبر قاعدة بيانات مركزية.</p>
+        <h3 class="ar">نظام إدارة مكتبة الابتكار</h3>
+        <h3 class="en">Innovation Library Management System</h3>
+        <p class="ar">نظام إداري داخلي متطور لإدارة سير العمل في مكتبة الجامعة، يشمل تنظيم عمليات استعارة الكتب، تتبع المخزون، وتسجيل وإدارة بيانات الطلاب لضمان كفاءة العمليات لموظفي المكتبة.</p>
+        <p class="en">An advanced internal management system for the university library's workflow. It organizes book borrowing, tracks inventory, and manages student data to ensure operational efficiency for library staff.</p>
+      </div>
+      <div class="project-tags">
+        <span class="tag">HTML/CSS</span>
+        <span class="tag">PHP Backend</span>
+        <span class="tag">Management System</span>
+      </div>
+    </div>
+
+    <!-- Innovation Management System (IMS) -->
+    <div class="project-card">
+      <div>
+        <h3 class="ar">نظام إدارة الابتكار الجامعي (IMS)</h3>
+        <h3 class="en">Innovation Management System (IMS)</h3>
+        <p class="ar">نظام ويب متكامل لإدارة ومراقبة موارد الجامعة من قاعات، ومختبرات علمية، يتيح للطلاب وأعضاء هيئة التدريس تتبع وحجز الموارد بكفاءة وسهولة تامة عبر قاعدة بيانات مركزية.</p>
+        <p class="en">A web-based system for managing and monitoring university resources such as lecture halls and scientific labs, allowing students and staff to track and book resources efficiently via a centralized database.</p>
       </div>
       <div class="project-tags">
         <span class="tag">HTML5 / CSS3</span>
@@ -406,15 +391,33 @@
       </div>
     </div>
 
+    <!-- Smart Firefighting -->
     <div class="project-card">
       <div>
-        <h3>الموقع التعريفي الشخصي (Cyber Portfolio)</h3>
-        <p>تصميم وتطوير هذا الموقع التعريفي المتجاوب باستخدام أحدث أساليب التصميم الزجاجي والمظلم (Glassmorphism) لاستعراض المهارات الهندسية والمشاريع التقنية بشكل احترافي.</p>
+        <h3 class="ar">نظام مكافحة الحرائق الذكي</h3>
+        <h3 class="en">Smart Firefighting System & Dashboard</h3>
+        <p class="ar">نظام متكامل يعتمد على متحكم ESP32 ومستشعرات لرصد وتوقع الحرائق وتسريب الغازات، مع بناء لوحة تحكم متقدمة باستخدام Qt/QML لمراقبة البيانات والتحكم لحظياً.</p>
+        <p class="en">An integrated system based on ESP32 and sensors to detect fires and gas leaks, accompanied by an advanced Qt/QML dashboard for real-time monitoring and control.</p>
       </div>
       <div class="project-tags">
-        <span class="tag">UI/UX Design</span>
-        <span class="tag">Glassmorphism</span>
-        <span class="tag">Responsive Web</span>
+        <span class="tag">ESP32</span>
+        <span class="tag">C++ & Qt/QML</span>
+        <span class="tag">Sensors Integration</span>
+      </div>
+    </div>
+
+    <!-- Autonomous Firefighting Robot -->
+    <div class="project-card">
+      <div>
+        <h3 class="ar">روبوت مكافحة الحرائق الذاتي القيادة</h3>
+        <h3 class="en">Autonomous Firefighting Robot</h3>
+        <p class="ar">روبوت ذكي يقوم بالتحرك الذاتي داخل المنشآت للكشف عن بؤر النيران باستخدام مستشعرات اللهب، وتفعيل نظام الإطفاء الميكانيكي مع إرسال إشعارات فورية.</p>
+        <p class="en">A smart robot that navigates autonomously indoors to detect fire sources using flame sensors, activating mechanical extinguishing systems and sending instant alerts.</p>
+      </div>
+      <div class="project-tags">
+        <span class="tag">Arduino</span>
+        <span class="tag">Embedded C</span>
+        <span class="tag">Robotics</span>
       </div>
     </div>
 
@@ -422,17 +425,37 @@
 </section>
 
 <section id="contact">
-  <h2 class="section-title">تواصل معي</h2>
+  <h2 class="section-title ar">تواصل معي</h2>
+  <h2 class="section-title en">Contact Me</h2>
   <div class="contact-container">
-    <p style="margin: 0; color: #94a3b8; font-size: 1.1rem;">هل لديك مشروع ذكي أو ترغب في التعاون الفني؟ يسعدني تواصلك فوراً.</p>
+    <p class="ar" style="margin: 0; color: #94a3b8; font-size: 1.1rem;">هل لديك مشروع ذكي أو ترغب في التعاون الفني؟ يسعدني تواصلك فوراً.</p>
+    <p class="en" style="margin: 0; color: #94a3b8; font-size: 1.1rem;">Have a smart project or want to collaborate? I'd love to hear from you.</p>
     <div class="social-icons">
-      <a href="mailto:abdelaziz.m.elnjjar@gmail.com" title="البريد الإلكتروني"><i class="fa-solid fa-envelope"></i></a>
-      <a href="tel:+201210959236" title="الهاتف"><i class="fa-solid fa-phone"></i></a>
-      <a href="https://www.linkedin.com/in/abdulaziz-elngar-95a162383" target="_blank" title="لينكد إن"><i class="fa-brands fa-linkedin"></i></a>
-      <a href="https://github.com/abdulaziz-elngr" target="_blank" title="جيت هاب"><i class="fa-brands fa-github"></i></a>
+      <a href="mailto:abdelaziz.m.elnjjar@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+      <a href="tel:+201210959236" title="Phone"><i class="fa-solid fa-phone"></i></a>
+      <a href="https://www.linkedin.com/in/abdulaziz-elngar-95a162383" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://github.com/abdulaziz-elngr" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
     </div>
   </div>
 </section>
+
+<script>
+  // Language Toggle Logic
+  function toggleLanguage() {
+    const htmlTag = document.getElementById('html-root');
+    const langBtnText = document.getElementById('lang-text');
+    
+    if (htmlTag.getAttribute('lang') === 'ar') {
+      htmlTag.setAttribute('lang', 'en');
+      htmlTag.setAttribute('dir', 'ltr');
+      langBtnText.textContent = 'العربية';
+    } else {
+      htmlTag.setAttribute('lang', 'ar');
+      htmlTag.setAttribute('dir', 'rtl');
+      langBtnText.textContent = 'English';
+    }
+  }
+</script>
 
 </body>
 </html>
